@@ -1,26 +1,21 @@
-﻿//using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace AuthorizationService.Models
 {
     public class UserContext:DbContext
     {
-        public UserContext() { }
-        public UserContext(DbContextOptions<UserContext> options) : base(options)
-        {
-        }
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-S1MBOP8B\SQLEXPRESS;Initial Catalog=AuthorizationDb;User ID=sa;Password=pass@2024");
+                optionsBuilder.UseSqlServer(@"Server=LAPTOP-S1MBOP8B\SQLEXPRESS;Database=AuthorizationService;Trusted_Connection=True;");
             }
         }
+
         public DbSet<User> Users { get; set; }
     }
 }
